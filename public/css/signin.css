@@ -1,0 +1,49 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-Concurso{
+    background-color: #1e7e34;
+}
+.dot-Otorgado{
+    background-color: #005cbf;
+}
+.dot-Anulado{
+    background-color: #4a5568;
+}
+.dot-Provisorio{
+    background-color: #c69500;
+}
+.dot-Finalizado{
+    background-color: #533f03;
+}
+.dot-Removido{
+    background-color: #721c24;
+}
