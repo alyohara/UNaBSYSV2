@@ -60,7 +60,7 @@
                                         <li><a class="dropdown-item" href="{{ route('coordinador.show2') }}">Agregar
                                                 Coordinación</a></li>
                                     @endif
-                                    <li><a class="dropdown-item" href="{{ route('coordinador.coordinadores') }}">Ver
+                                    <li><a class="dropdown-item" href="{{ route('coordinador.coordinadores') }}">
                                             Ver Coordinadores</a></li>
                                 </ul>
                             </li>

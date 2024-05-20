@@ -368,8 +368,8 @@ class ComposerStaticInitb6f4ecb37e5389480885087e647429e2
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -575,11 +575,13 @@ class ComposerStaticInitb6f4ecb37e5389480885087e647429e2
         'App\\Http\\Controllers\\CareerController' => __DIR__ . '/../..' . '/app/Http/Controllers/CareerController.php',
         'App\\Http\\Controllers\\CargoController' => __DIR__ . '/../..' . '/app/Http/Controllers/CargoController.php',
         'App\\Http\\Controllers\\CollegeController' => __DIR__ . '/../..' . '/app/Http/Controllers/CollegeController.php',
+        'App\\Http\\Controllers\\ConfigController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfigController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CoordinadorCarreraController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoordinadorCarreraController.php',
         'App\\Http\\Controllers\\CoordinadorController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoordinadorController.php',
         'App\\Http\\Controllers\\CoordinadorDeptoController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoordinadorDeptoController.php',
         'App\\Http\\Controllers\\CoordinadorMateriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoordinadorMateriaController.php',
+        'App\\Http\\Controllers\\CuatrimestreController' => __DIR__ . '/../..' . '/app/Http/Controllers/CuatrimestreController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\LogoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogoutController.php',
@@ -616,10 +618,12 @@ class ComposerStaticInitb6f4ecb37e5389480885087e647429e2
         'App\\Models\\Career' => __DIR__ . '/../..' . '/app/Models/Career.php',
         'App\\Models\\Cargo' => __DIR__ . '/../..' . '/app/Models/Cargo.php',
         'App\\Models\\College' => __DIR__ . '/../..' . '/app/Models/College.php',
+        'App\\Models\\Config' => __DIR__ . '/../..' . '/app/Models/Config.php',
         'App\\Models\\Coordinador' => __DIR__ . '/../..' . '/app/Models/Coordinador.php',
         'App\\Models\\CoordinadorCarrera' => __DIR__ . '/../..' . '/app/Models/CoordinadorCarrera.php',
         'App\\Models\\CoordinadorDepto' => __DIR__ . '/../..' . '/app/Models/CoordinadorDepto.php',
         'App\\Models\\CoordinadorMateria' => __DIR__ . '/../..' . '/app/Models/CoordinadorMateria.php',
+        'App\\Models\\Cuatrimestre' => __DIR__ . '/../..' . '/app/Models/Cuatrimestre.php',
         'App\\Models\\File' => __DIR__ . '/../..' . '/app/Models/File.php',
         'App\\Models\\Persona' => __DIR__ . '/../..' . '/app/Models/Persona.php',
         'App\\Models\\SedeDeCursada' => __DIR__ . '/../..' . '/app/Models/SedeDeCursada.php',

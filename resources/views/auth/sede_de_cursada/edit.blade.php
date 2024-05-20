@@ -22,21 +22,21 @@
                     Datos de la Sede
                 </div>
                 <div class="form-group form-floating mb-3">
-                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" autofocus value="{{$sede->nombre}}">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" autofocus value="{{$sede->nombre}}" required>
                     <label for="floatingName">Nombre</label>
                     @if ($errors->has('nombre'))
                         <span class="text-danger text-left">{{ $errors->first('nombre') }}</span>
                     @endif
                 </div>
                 <div class="form-group form-floating mb-3">
-                    <input type="text" class="form-control" name="descripcion"  placeholder="Descripcion" autofocus value="{{$sede->descripcion}}">
+                    <input type="text" class="form-control" name="descripcion"  placeholder="Descripcion" autofocus value="{{$sede->descripcion}}" required>
                     <label for="floatingName">Descripcion</label>
                     @if ($errors->has('descripcion'))
                         <span class="text-danger text-left">{{ $errors->first('descripcion') }}</span>
                     @endif
                 </div>
                 <div class="form-group form-floating mb-3">
-                    <input type="text" class="form-control" name="direccion" placeholder="Direccion" autofocus value="{{$sede->direccion}}">
+                    <input type="text" class="form-control" name="direccion" placeholder="Direccion" autofocus value="{{$sede->direccion}}" required>
                     <label for="floatingName">Direccion</label>
                     @if ($errors->has('direccion'))
                         <span class="text-danger text-left">{{ $errors->first('direccion') }}</span>

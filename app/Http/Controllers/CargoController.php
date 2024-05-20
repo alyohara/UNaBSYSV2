@@ -8,9 +8,11 @@ use App\Models\Career;
 use App\Models\Cargo;
 use App\Models\College;
 use App\Models\Coordinador;
+use App\Models\CoordinadorCarrera;
 use App\Models\CoordinadorMateria;
 use App\Models\Persona;
 use App\Models\Subject;
+use App\Models\SubjectCareer;
 use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Http\Request;
@@ -973,4 +975,125 @@ class CargoController extends Controller
         }
         return redirect('/cargosSinValidar')->with('success', "Cargos validados correctamente.");
     }
+
+    //*****************************************FUNCIONES PARA EL FRONTEND****************************************************
+    // Funcion para ver los cargos actuales
+    public function viewCargosActuales()
+    {
+        if ($cuatrimestre_actual = Cuatrimestre::where('status', 1)->where('deleted_at', null)->first()) {
+            $cargos = Cargo::where('status', 1)->where('deleted_at', null)->where('fecha_alta', '>=', $cuatrimestre_actual->fecha_inicio)->where('fecha_alta', '<=', $cuatrimestre_actual->fecha_fin)->get();
+            return $cargos;
+        } else {
+            $cargos = Cargo::where('status', 1)->where('deleted_at', null)->get();
+            return $cargos;
+        }
+
     }
+
+    // Funcion para ver los docentes de los cargos actuales
+    public function viewDocentesCargosActuales()
+    {
+        $cargos = $this->viewCargosActuales();
+        $docentes = [];
+        foreach ($cargos as $cargo) {
+            $docente = Persona::where('id', $cargo->persona_id)->where('deleted_at', null)->first();
+            $docentes[] = $docente;
+        }
+        //cleaning docentes duplicateds
+        $docentes = array_unique($docentes);
+        return $docentes;
+    }
+
+    // Funcion para ver las materias que coordina un coordinador:
+    // un coordinador puede coordinar varias materias
+    // un coordinador puede coordinar varias carreras, si es así coordina cada una de las materias de esa carrera
+    // un coordinador puede coordinar varias colleges, si es asi coordina todas las carreras en esa college; y al mismo tiempo coordina todas las materias de todas esas carreras
+
+    public static function viewMateriasCoordinadas($coordinador_id)
+    {
+        $coordinador = Coordinador::where('id', $coordinador_id)->first();
+        $materias = [];
+        $coordinadores_materias = CoordinadorMateria::where('coordinador_id', $coordinador_id)->get();
+        foreach ($coordinadores_materias as $coordinador_materia) {
+            $materia = Subject::where('id', $coordinador_materia->materia_id)->where('deleted_at', null)->first();
+            $materias[] = $materia;
+        }
+        // must de uniques
+        $materias = array_unique($materias);
+        return $materias;
+    }
+
+    public static function viewMateriasCarrerasCoordinadas($coordinador_id)
+    {
+        $coordinador = Coordinador::where('id', $coordinador_id)->where('deleted_at', null)->first();
+        $materias = [];
+        $coordinadores_carreras = CoordinadorCarrera::where('coordinador_id', $coordinador_id)->get();
+        foreach ($coordinadores_carreras as $coordinador_carrera) {
+            $carrera = Career::where('id', $coordinador_carrera->carrera_id)->where('deleted_at', null)->first();
+            $materias_carreras = $carrera->materias;
+            foreach ($materias_carreras as $materia_carrera) {
+                $materia = Subject::where('id', $materia_carrera->subject_id)->where('deleted_at', null)->first();
+                $materias[] = $materia_carrera;
+            }
+        }
+        // must de uniques
+        $materias = array_unique($materias);
+        return $materias;
+    }
+
+    public static function viewMateriasCarrerasCollegeCoordinadas($coordinador_id)
+    {
+        $coordinador = Coordinador::where('id', $coordinador_id)->where('deleted_at', null)->first();
+        $materias = [];
+        $coordinadores_colleges = $coordinador->deptos;
+        foreach ($coordinadores_colleges as $coordinador_college) {
+            $college = College::where('id', $coordinador_college->college_id)->where('deleted_at', null)->first();
+            $carreras_college = Career::where('college_id', $college->id)->where('deleted_at', null)->get();
+            foreach ($carreras_college as $carrera_college) {
+                $materias_carrera = Subject::where('college_id', $carrera_college->id)->where('deleted_at', null)->get();
+                foreach ($materias_carrera as $materia_carrera) {
+                    $materias[] = $materia_carrera;
+                }
+            }
+        }
+        // must de uniques
+        $materias = array_unique($materias);
+        return $materias;
+    }
+
+    public static function viewAllMateriasCoordinadas($coordinador_id)
+    {
+        $materias = [];
+        $materias1 = CargoController::viewMateriasCoordinadas($coordinador_id);
+        $materias2 = CargoController::viewMateriasCarrerasCoordinadas($coordinador_id);
+        $materias3 = CargoController::viewMateriasCarrerasCollegeCoordinadas($coordinador_id);
+        foreach ($materias1 as $materia1) {
+            $materias[] = $materia1;
+        }
+        foreach ($materias2 as $materia2) {
+            $materias[] = $materia2;
+        }
+        foreach ($materias3 as $materia3) {
+            $materias[] = $materia3;
+        }
+        // must de uniques
+        $materias = array_unique($materias);
+        return $materias;
+    }
+
+    public static function viewAllDocentesCoordinadosViaMaterias($coordinador_id)
+    {
+        $materias = CargoController::viewAllMateriasCoordinadas($coordinador_id);
+        $docentes = [];
+        foreach ($materias as $materia) {
+            $cargos = Cargo::where('subject_id', $materia->id)->where('deleted_at', null)->get();
+            foreach ($cargos as $cargo) {
+                $docente = Persona::where('id', $cargo->persona_id)->where('deleted_at', null)->first();
+                $docentes[] = $docente;
+            }
+        }
+        //cleaning docentes duplicateds
+        $docentes = array_unique($docentes);
+        return $docentes;
+    }
+}

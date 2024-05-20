@@ -1,0 +1,53 @@
+Tutorial
+
+Bedeles: agregar "Sede de cursada"(ya que por el momento tenemos :
+Nacional,Estrada, Escuela N°5 , Burzaco y Quinta Roca.
+
+Materias: Agergarle más de una opción por docente.
+
+Validación de cargos: agregar botón "masivo", para generar muchos al
+mismo tiempo
+
+Cargos: agregar selecctor de tiempo
+
+Opción de Docente Nuevo: agregar algun item ue lo identifique al
+cargarlo y se pueda visualizar desde el administrador.
+
+Alertas/Notificación: agregar opciones de mensaje del administrador
+para coordinadores. Diferenciarlas de las alertas del sistema.
+
+
+Sacar Sede" Colegio Nuevo Burzaco"
+
+En las "Asistencias", podríamos agregar: la opción "Virtual"
+
+En la solapa "Sede de Cursada" agregar Campus UNaB
+
+Desde la solapa coordinadores, una opción para descargar los docentes correspondientes a ese Coordinador, para que sea más simple la búsqueda.
+Podrías agregar  el filtro de Coordinador  desde exportar Cargos
+
+ver tema de mensajeria interna, volver a implementar
+
+- Solapa de Cargos: 
+    1. Al exportar datos no da la opción de filtrar por coordinador.
+    2. El botón de Renovar cargos, no funciona ya que sale error
+    3. Modificar las resoluciones de cada docente, solo permite hacerlo en forma individual, se necesita que sea en forma masiva.
+    
+-  Docentes: tendría que haber opción de búsqueda de la totalidad de docentes  por carreras, ya que solo permite ver docentes de una carrera y luego hay que seleccionar materia por materia.
+
+
+
+-----------------------------------------------------
+además de esto: tenemos que ver un par de temas importantes, por ejemplo, cada vez que haya listados, primero poner únicamente los que figuren dentro del cuatrimestre actual
+
+verificar el tema de los cargos, como los ve el coordinador y cuales está viendo mal
+
+y ver el listado "modelo carga docente" y como lo podríamos adecuar a nuestra carga
+
+
+
+
+
+
+
+

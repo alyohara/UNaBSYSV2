@@ -117,7 +117,9 @@ class CoordinadorController extends Controller
         $deptos = College::all();
         $carreras = Career::all();
         $materias = Subject::all();
-        return view('auth.coordinadores.register', compact('user', 'deptos', 'carreras', 'materias'));
+        $docentes_coordinados = CargoController::viewAllDocentesCoordinadosViaMaterias($id);
+
+        return view('auth.coordinadores.register', compact('user', 'deptos', 'carreras', 'materias', 'docentes_coordinados'));
 
     }
 
@@ -254,8 +256,9 @@ class CoordinadorController extends Controller
         $deptos_coordinados = CoordinadorDepto::all()->where('coordinador_id', $id);
         $carreras_coordinadas = CoordinadorCarrera::all()->where('coordinador_id', $id);
         $materias_coordinadas = CoordinadorMateria::all()->where('coordinador_id', $id);
+        $docentes_coordinados = CargoController::viewAllDocentesCoordinadosViaMaterias($id);
 
-        return view('auth.coordinadores.verCoordinador',  compact('coordinador',  'deptos_coordinados', 'carreras_coordinadas', 'materias_coordinadas'));
+        return view('auth.coordinadores.verCoordinador',  compact('coordinador',  'deptos_coordinados', 'carreras_coordinadas', 'materias_coordinadas', 'docentes_coordinados'));
 
     }
     /**

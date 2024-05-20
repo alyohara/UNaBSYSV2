@@ -71,10 +71,31 @@
 
                 </div>
 
+            <!-- div to show every docente coordinados from docentes_coordinados -->
+
+            <div class="form-group form-floating mb-3">
+                <div class="h6 pb-2 mb-4 ">
+                    Docentes Coordinados:
+                </div>
+                <div class="row">
+                    @foreach($docentes_coordinados as $docente)
+                        <div class="col-sm-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <a href="{{route('persona.verPersona', $docente->id)}}">{{$docente->name}}, {{$docente->lastname}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
 
 
-                @include('auth.partials.copy')
+
+
+
+            @include('auth.partials.copy')
 
 
         @endauth
