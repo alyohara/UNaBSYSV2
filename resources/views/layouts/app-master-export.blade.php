@@ -179,7 +179,7 @@
             var columnIndex = $(this).index();
 
             // Exclude columns where you don't want to add filters
-            if ((columnIndex !== 11) && (columnIndex !== 10)) {
+            if ((columnIndex !== 12) && (columnIndex !== 10) ) {
                 $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
             }
 

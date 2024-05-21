@@ -10,6 +10,7 @@ use App\Models\College;
 use App\Models\Coordinador;
 use App\Models\CoordinadorCarrera;
 use App\Models\CoordinadorMateria;
+use App\Models\Cuatrimestre;
 use App\Models\Persona;
 use App\Models\Subject;
 use App\Models\SubjectCareer;
@@ -1086,11 +1087,26 @@ class CargoController extends Controller
         $materias = CargoController::viewAllMateriasCoordinadas($coordinador_id);
         $docentes = [];
         foreach ($materias as $materia) {
+
+            //need to filter by $cuatrimestre_actual->fecha_inicio  and $cuatrimestre_actual->fecha_fin with cargo->fecha_alta and cargo->fecha_baja
             $cargos = Cargo::where('subject_id', $materia->id)->where('deleted_at', null)->get();
             foreach ($cargos as $cargo) {
-                $docente = Persona::where('id', $cargo->persona_id)->where('deleted_at', null)->first();
-                $docentes[] = $docente;
+                $cuatrimestre_actual = Cuatrimestre::current()->first();
+                if ($cuatrimestre_actual) {
+                    if (($cargo->fecha_alta >= $cuatrimestre_actual->fecha_inicio && $cargo->fecha_alta <= $cuatrimestre_actual->fecha_fin)
+                        || ($cargo->fecha_alta >= $cuatrimestre_actual->fecha_inicio && $cargo->fecha_baja == null)
+                        || ($cargo->fecha_alta <= $cuatrimestre_actual->fecha_inicio && $cargo->fecha_baja >= $cuatrimestre_actual->fecha_inicio)
+                        || ($cargo->fecha_alta <= $cuatrimestre_actual->fecha_inicio && $cargo->fecha_baja == null)
+                        ) {
+                        $docente = Persona::where('id', $cargo->persona_id)->where('deleted_at', null)->first();
+                        $docentes[] = $docente;
+                    }
+                } else {
+                    $docente = Persona::where('id', $cargo->persona_id)->where('deleted_at', null)->first();
+                    $docentes[] = $docente;
+                }
             }
+
         }
         //cleaning docentes duplicateds
         $docentes = array_unique($docentes);
